@@ -13,7 +13,7 @@ const Questions = () => {
       .then((res) => res.json())
       .then((data) => setData(data));
   }, []);
-
+  console.log(index);
   const currentQuestion = data[index];
   const handleClick = (res) => {
     console.log("clicked", res);
@@ -26,7 +26,9 @@ const Questions = () => {
         showConfirmButton: false,
         timer: 1500,
       });
+      setIndex(index + 1);
     } else {
+      setIndex(index + 1);
       score.push(res);
       Swal.fire({
         position: "top-end",
@@ -55,33 +57,56 @@ const Questions = () => {
       >
         <div className="flex justify-center ">
           <ul className="steps gap-3">
-            <li className="step step-primary">Question 1</li>
-            <li className="step step-primary">Question 2</li>
-            <li className="step">Question 3</li>
-            <li className="step">Question 4</li>
-            <li className="step">Question 5</li>
-          </ul>
-        </div>
-        <div className="p-6 bg-purple-700 text-white rounded-lg shadow-lg w-[80%] mx-auto">
-          <h1 className="text-2xl font-bold mb-4">
-            {currentQuestion?.question}
-          </h1>
-          <ul className="space-y-2">
-            {currentQuestion?.answers.map((res, dex) => (
+            {data.map((res, num) => (
               <li
-                onClick={() => handleClick(res)}
-                key={dex}
-                className="flex items-center gap-2 p-3 bg-primary/20 rounded-lg hover:bg-primary/30 cursor-pointer"
+                key={num}
+                className={`step ${num === index ? "step-primary" : ""}`}
               >
-                <span className="text-white font-semibold">{dex + 1}.</span>
-                <span>{res}</span>
+                Question {num + 1}
               </li>
             ))}
           </ul>
-
-          <div className="flex justify-end">
-            <button className="btn btn-primary">Next</button>
-          </div>
+        </div>
+        <div className="p-6 bg-purple-700 text-white rounded-lg shadow-lg w-[80%] mx-auto">
+          {index === 5 ? (
+            <div className="">
+              <div>
+                <p className="text-center text-3xl">
+                  Your Score is{" "}
+                  <span className="text-red-600">{score.length}</span>
+                </p>
+              </div>
+              <div className="flex justify-end">
+                <button
+                  onClick={() => {
+                    setIndex(0), setScore([]);
+                  }}
+                  className="btn btn-primary"
+                >
+                  Restart
+                </button>
+              </div>
+            </div>
+          ) : (
+            <div>
+              {" "}
+              <h1 className="text-2xl font-bold mb-4">
+                {currentQuestion?.question}
+              </h1>
+              <ul className="space-y-2">
+                {currentQuestion?.answers.map((res, dex) => (
+                  <li
+                    onClick={() => handleClick(res)}
+                    key={dex}
+                    className="flex items-center gap-2 p-3 bg-primary/20 rounded-lg hover:bg-primary/30 cursor-pointer"
+                  >
+                    <span className="text-white font-semibold">{dex + 1}.</span>
+                    <span>{res}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
         </div>
       </div>
     );
