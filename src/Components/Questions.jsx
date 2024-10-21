@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Swal from "sweetalert2";
+import { Link } from "react-router-dom";
 const Questions = () => {
   const [data, setData] = useState([]);
   const [index, setIndex] = useState(0);
@@ -108,6 +109,15 @@ const Questions = () => {
             </div>
           )}
         </div>
+        <Link to={"/"}>
+          {" "}
+          <button
+            className="btn btn-primary mx-5
+          "
+          >
+            Home
+          </button>
+        </Link>
       </div>
     );
 };
