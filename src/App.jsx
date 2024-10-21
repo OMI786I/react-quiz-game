@@ -6,7 +6,13 @@ import TsParticleComponents from "./Components/TsParticleComponents";
 function App() {
   return (
     <>
-      <TsParticleComponents />
+      <div className="app-container">
+        <TsParticleComponents />
+      </div>
+      <div className="content">
+        <p>Welcome To The Quiz Game</p>
+        <button className="btn btn-primary btn-lg">Start</button>
+      </div>
     </>
   );
 }
