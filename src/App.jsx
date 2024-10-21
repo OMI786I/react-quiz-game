@@ -3,6 +3,7 @@ import { useCallback } from "react";
 import Particles from "react-tsparticles";
 import { loadFull } from "tsparticles";
 import TsParticleComponents from "./Components/TsParticleComponents";
+import { Link } from "react-router-dom";
 function App() {
   return (
     <>
@@ -11,7 +12,10 @@ function App() {
       </div>
       <div className="content">
         <p>Welcome To The Quiz Game</p>
-        <button className="btn btn-primary btn-lg">Start</button>
+        <Link to={"/question"}>
+          {" "}
+          <button className="btn btn-primary btn-lg">Start</button>
+        </Link>
       </div>
     </>
   );
